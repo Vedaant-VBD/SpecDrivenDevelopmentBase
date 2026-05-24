@@ -63,3 +63,7 @@ curl "http://localhost:8000/reports?limit=3" | python -m json.tool
 | `limit`      | int (1..200)    | `20`         | Page size.                                       |
 
 Responses only include public fields — `internal_id` and `owner_email` are stripped on the way out.
+
+---
+
+For the workshop exercise, see [exercises/01_lightweight_spec/README.md](exercises/01_lightweight_spec/README.md). Project conventions are documented in [AGENTS.md](AGENTS.md) — read that first.
