@@ -26,7 +26,7 @@ _TITLES: list[str] = [
     "Q1 revenue summary",
     "Marketing spend, Feb",
     "Support cost rollup",
-    'CSV with commas, "quotes" and newlines\nin the title',  # edge case for RFC 4180
+    'CSV with commas, "quotes" and newlines\nin the title',
     "AWS invoice review",
     "Engineering headcount plan",
     "Customer NPS analysis",

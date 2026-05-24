@@ -27,11 +27,7 @@ def list_reports(
     offset: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=200),
 ) -> ReportListResponse:
-    """Return a paginated list of reports.
-
-    Public fields only — `internal_id` and `owner_email` are stripped via
-    `ReportPublic.from_internal`.
-    """
+    """Return a paginated list of reports."""
 
     try:
         rows = query(

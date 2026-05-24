@@ -1,6 +1,4 @@
-"""Pydantic models for the Reports app.
-The CSV export feature added during the workshop must also honor this distinction.
-"""
+"""Pydantic models for the Reports app."""
 
 from __future__ import annotations
 
@@ -13,22 +11,22 @@ ReportStatus = Literal["pending", "approved", "rejected", "archived"]
 
 
 class Report(BaseModel):
-    """Internal report model. Holds every field, including internal-only ones."""
+    """Report record."""
 
     model_config = ConfigDict(frozen=True)
 
     id: int
-    internal_id: str  # INTERNAL ONLY — must never be exposed
+    internal_id: str
     title: str
     status: ReportStatus
     owner: str
-    owner_email: str  # INTERNAL ONLY — must never be exposed
+    owner_email: str
     amount: float
     created_at: datetime
 
 
 class ReportPublic(BaseModel):
-    """Public response shape. Omits internal-only fields by construction."""
+    """Public response shape."""
 
     id: int
     title: str
