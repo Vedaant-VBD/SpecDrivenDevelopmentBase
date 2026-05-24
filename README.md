@@ -63,3 +63,7 @@ curl "http://localhost:8000/reports?limit=3" | python -m json.tool
 | `limit`      | int (1..200)    | `20`         | Page size.                                       |
 
 Responses only include public fields — `internal_id` and `owner_email` are stripped on the way out.
+
+---
+
+For the workshop exercise, see [exercises/02_openspec/README.md](exercises/02_openspec/README.md). The spec source of truth lives in [openspec/specs/](openspec/specs/); project conventions are in [AGENTS.md](AGENTS.md).
