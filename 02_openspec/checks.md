@@ -23,7 +23,16 @@ for p in solutions exercises/01_vibe exercises/01_lightweight_spec; do
 done
 [ -d openspec ] && echo "ok: openspec/ present" || echo "MISSING: openspec/"
 
-# 2. No stale workshop references
+# 2. All four IDE folders pre-initialized by openspec init
+for d in .cursor .claude .agent .github; do
+  [ -d "$d" ] && echo "ok: $d/ present ($(find $d -type f | wc -l | tr -d ' ') files)" || echo "MISSING: $d/"
+done
+# Expect each: 8 files (4 commands/workflows/prompts + 4 skills)
+
+# 3. openspec/config.yaml present (created by openspec init 1.2.0)
+[ -f openspec/config.yaml ] && echo "ok: openspec/config.yaml present" || echo "MISSING: openspec/config.yaml"
+
+# 4. No stale workshop references
 grep -rnE "round-3-sdd|02_lightweight_spec/|01_vibe/" --include="*.md" --include="*.py" --include="*.toml" .
 # Expect: no hits
 ```
@@ -47,7 +56,7 @@ pytest -q                                       # expect 6 passed
 ## OpenSpec smoke test
 
 ```bash
-which openspec                                  # expect a path; install per SETUP.md if missing
+openspec --version                              # expect: 1.2.0 (workshop is pinned)
 
 # The empty-changes state on a fresh checkpoint
 openspec list                                   # prints "No active changes found." (exit code 1; that's the empty-list signal, not a failure)
@@ -57,13 +66,23 @@ openspec validate --all                         # expect: spec/reports passes
 ```
 
 Notes for the facilitator:
-- The current `@fission-ai/openspec` validator requires a `## Purpose` section in every
-  spec and at least one `#### Scenario:` block per requirement. This checkpoint already
-  satisfies both. If a participant edits the live spec by hand and breaks validation,
-  the error message points at the missing section.
+- **Pinned to OpenSpec 1.2.0.** Newer versions may have stricter validators or move
+  files around; if a participant has a different version installed, ask them to
+  `npm install -g @fission-ai/openspec@1.2.0` and re-run setup.
+- The 1.2.0 validator requires a `## Purpose` section in every spec and at least one
+  `#### Scenario:` block per requirement. This checkpoint already satisfies both. If a
+  participant edits the live spec by hand and breaks validation, the error points at
+  the missing section.
 - `openspec list` exiting with code 1 on an empty list is the CLI's normal behaviour.
   The setup check in `exercises/00_setup_check/README.md` treats "runs without crashing"
   as success.
+- The checkpoint ships with **all four IDE folders pre-initialized**
+  (`.cursor`, `.claude`, `.agent`, `.github`) by `openspec init --tools
+  cursor,claude,antigravity,github-copilot`. Participants do not need to run init
+  themselves — they pick the section in `SETUP.md` that matches their editor.
+- `openspec init` also created `openspec/config.yaml` (the new 1.2.0 schema-driven
+  config file). The original `openspec/project.md` is kept alongside for
+  HOW_TO_USE_OPENSPEC continuity; both work in 1.2.0.
 
 ## Sniff test
 
