@@ -99,11 +99,18 @@ mention that change proposals go under `openspec/changes/<change-name>/` and **n
 ## Strong reference change proposal (facilitator key)
 
 This is what a strong filled-in `openspec/changes/add-csv-export/` directory looks like.
-Use it to grade participant proposals and to drive the debrief. The three files below
-correspond to `proposal.md`, `tasks.md`, and `specs/reports/spec.md` inside the change
-folder.
+Use it to grade participant proposals and to drive the debrief.
 
-### proposal.md
+> **Note (1.2.0 schema):** A spec-driven change in 1.2.0 also includes a `design.md`
+> artifact in addition to `proposal.md`, `tasks.md`, and the delta `specs/`. The
+> `proposal.md` headers are now `## Why / ## What Changes / ## Capabilities / ## Impact`
+> (run `openspec instructions proposal --change <name>` to see the live template). The
+> reference proposal below uses the workshop's classic `Why / What changes / Out of scope
+> / Risks` structure — the *ideas* (column allowlist, row cap, timezone) still apply;
+> a participant working through `/opsx:propose` will see the new headers, where
+> "Out of scope" and "Risks" fold into design.md.
+
+### proposal.md (workshop reference structure)
 
 ```markdown
 # Proposal — add-csv-export
@@ -219,16 +226,22 @@ OpenSpec-specific:
 ## Anti-patterns to watch for in weak proposals
 
 - **Empty or one-line `## Why`** → no rationale survives into the archived spec.
+- **`## Capabilities` left as a placeholder** → the agent has no signal on which
+  spec files to create or modify; subsequent artifacts go off-track.
 - **`tasks.md` not atomic** (e.g. a single bullet "implement CSV export") → the agent
   has no checkpoints; you end up vibe-coding inside the change folder.
+- **`design.md` skipped** (artifact left blocked) → the agent applies tasks against
+  whatever it imagines, not an agreed implementation approach.
 - **Delta uses prose paragraphs** instead of `### Requirement:` / `#### Scenario:`
   blocks → archive can't merge cleanly.
 - **Wrong delta header** (`## NEW` instead of `## ADDED Requirements`) → validator
   rejects.
-- **Missing `## Out of scope`** → agent invents XLSX/PDF/streaming.
-- **No risks section** → no shared column allowlist, no row cap, no timezone story.
+- **No risks / no row cap / no timezone discussion in design.md** → implementation
+  inherits the gaps.
 - **Modifies `openspec/specs/reports/spec.md` directly** instead of creating a change.
   Disallowed by AGENTS.md and bypasses the validator.
+- **Skips `/opsx:propose` and asks the agent to "just implement CSV export"** → no
+  artifacts, no audit trail, no archive — essentially regresses to Round 1.
 
 ## Debrief framing
 
